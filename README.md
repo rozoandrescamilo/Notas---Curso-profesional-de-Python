@@ -158,6 +158,8 @@ El scope es el alcance que tienen las variables. Depende de donde declare o inic
 
 **"Una variable solo está disponible dentro de la región donde fue creada".**
 
+[![14,5](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/14,5.png?raw=true "14,5")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/14,5.png?raw=true "14,5")
+
 ### Local Scope
 
 Es la región que corresponde el ámbito de una función, donde podremos tener una o más variables, las variables van a ser accesibles únicamente en esta región y no serán visibles para otras regiones.
