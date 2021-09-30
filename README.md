@@ -218,3 +218,110 @@ if __name__ == "__main__":
 ```
 
 [![18](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/18.png?raw=true "18")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/18.png?raw=true "18")
+
+## Decoradores
+
+Es el concepto más avanzado de funciones. Es una función que recibe como parámetro otra función, le añade cosas, y retorna una función diferente.
+
+La función tiene que llamarse en la nested para que la función decorador pueda incluirla. Sin la nested tendríamos que llamar a la función decorador e incluirle la función hola. Con este sistema solo creamos el decorador con nested y lo colocamos como decorador en la función que queremos decorar.
+
+[![19](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/19.png?raw=true "19")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/19.png?raw=true "19")
+
+[![20](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/20.png?raw=true "20")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/20.png?raw=true "20")
+
+[![21](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/21.png?raw=true "21")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/21.png?raw=true "21")
+
+## Programando decoradores
+
+Creamos el archivo **decorators.py** y vamos a crear un decorador que se llame **execution_time** y nos va servir para medir el tiempo de ejecución de una función hasta poner su resultado en pantalla, se podrá llevar a otras funciones como un código útil con la eficiencia de estos.
+
+```python
+from datetime import datetime #Módulo para medir tiempo de una ejecución
+
+def execution_time(func):
+    def wrapper(): #wrapper calcula el tiempo de operación
+        inicial_time = datetime.now() #Tiempo exacto ahora
+        func() #ejecutar la función
+        final_time = datetime.now() #Tiempo final
+        time_elapsed = final_time - inicial_time #Obtener la cantidad de segundos
+        print("Pasaron " + str(time_elapsed.total_seconds()) + " segundos")
+    return wrapper #Closure donde la nested function debe retornar
+
+@execution_time #Decorador
+def random_func():
+    for _ in range(1, 100000000): #Cuando no se requiere tener el valor de cada  vuelta se coloca "_"
+        pass
+
+random_func()
+```
+
+[![22](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/22.png?raw=true "22")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/22.png?raw=true "22")
+
+Ahora vamos a agregar algunas otras funciones para decorarlas, pero es necesario que nuestra nested function **wrapper** agreguemos los parámetros: `*args`, `**Kwargs`. No importa la cantidad de argumentos posicionales (`*args`) y la cantidad de argumentos nombrados (`**Kwargs`) la función lo leerá.
+
+Operador de desestructuración “*”
+
+```python
+from datetime import datetime #Módulo para medir tiempo de una ejecución
+
+def execution_time(func):
+    def wrapper(*args, **kwargs): #wrapper calcula el tiempo de operación
+        #No importa la cantidad de argumentos posicionales (*args) y
+        #la cantidad de argumentos nombrados (**Kwargs) la función lo leerá
+        inicial_time = datetime.now() #Tiempo exacto ahora
+        func(*args, **kwargs) #ejecutar la función
+        final_time = datetime.now() #Tiempo final
+        time_elapsed = final_time - inicial_time #Obtener la cantidad de segundos
+        print("Pasaron " + str(time_elapsed.total_seconds()) + " segundos")
+    return wrapper #Closure donde la nested function debe retornar
+
+@execution_time #Decorador
+def random_func():
+    for _ in range(1, 100000000): #Cuando no se requiere tener el valor de cada  vuelta se coloca "_"
+        pass
+
+@execution_time
+def suma(a: int, b: int) -> int:
+    return a + b
+
+@execution_time
+def saludo(nombre = "Andrés"):
+    print("Hola " + nombre)
+
+
+random_func()
+suma(5, 5)
+saludo("Camilo")
+```
+
+[![23](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/23.png?raw=true "23")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/23.png?raw=true "23")
+
+### Reto libre
+
+Utilizando el código anterior para calcular al tiempo de ejecución , realice un programa de libre elección.
+
+```python
+from datetime import datetime #Módulo para medir tiempo de una ejecución
+
+def execution_time(func):
+    def wrapper(*args, **kwargs): #wrapper calcula el tiempo de operación
+        inicial_time = datetime.now() #Tiempo exacto ahora
+        func(*args, **kwargs) #ejecutar la función
+        final_time = datetime.now() #Tiempo final
+        time_elapsed = final_time - inicial_time #Obtener la cantidad de segundos
+        print("La función tardó " + str(time_elapsed.total_seconds()) + " segundos")
+    return wrapper #Closure donde la nested function debe retornar
+
+@execution_time
+def exponent(x: int, n: int) -> int:
+    print(x ** n)
+
+exponent(10, 5)
+```
+
+[![24](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/24.png?raw=true "24")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/24.png?raw=true "24")
+
+[![25](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/25.png?raw=true "25")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/25.png?raw=true "25")
+
+
+
