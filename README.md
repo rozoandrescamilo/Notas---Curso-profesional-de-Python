@@ -639,4 +639,73 @@ if __name__ == "__main__":
 
 [![48](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/48.png?raw=true "48")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/48.png?raw=true "48")
 
+# Bonus
 
+## Manejo de fechas
+
+**Método básico con Coordinated Universal Time / Tiempo Universal Coordinado (UTC)**
+
+Es importante evitar usar **datetime.now()** porque toma la hora local. Mejor usar **datetime.utcnow()** para usar la hora universal. Nosotros trabajamos con equipos de todo el mundo, no podemos usar hora local.
+
+Para esto debemos tener conocimiento del módulo **datetime,** para esto algunos ejemplos:
+
+[![49](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/49.png?raw=true "49")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/49.png?raw=true "49")
+
+Solo la fecha de hoy:
+
+[![50](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/50.png?raw=true "50")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/50.png?raw=true "50")
+
+Imprimir por separado año, mes y día:
+
+[![51](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/51.png?raw=true "51")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/51.png?raw=true "51")
+
+### Formateo de fechas
+
+Tabla de código de formato resumida:
+
+[![52](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/52.png?raw=true "52")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/52.png?raw=true "52")
+
+Lista oficial de todos los códigos de formato:
+[https://docs.python.org/es/3/library/datetime.html#strftime-and-strptime-format-codes](https://docs.python.org/es/3/library/datetime.html#strftime-and-strptime-format-codes "https://docs.python.org/es/3/library/datetime.html#strftime-and-strptime-format-codes")
+
+Ejemplo:
+
+[![53](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/53.png?raw=true "53")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/53.png?raw=true "53")
+
+[![54](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/54.png?raw=true "54")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/54.png?raw=true "54")
+
+[![55](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/55.png?raw=true "55")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/55.png?raw=true "55")
+
+## Time zones
+
+Para trabajar con zonas horarias se debe trabajar con el módulo **pytz,** el cual debe ser instalado por **pip** ya que no viene de fábrica:
+
+[![56](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/56.png?raw=true "56")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/56.png?raw=true "56")
+
+Adicional, requerimos los **Time zones database name** que podemos encontrar en el siguiente enlace:
+
+[https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones "https://en.wikipedia.org/wiki/List_of_tz_database_time_zones")
+
+```python
+from datetime import datetime
+import pytz
+
+bogota_timezone = pytz.timezone("America/Bogota") #Zona horaria Bogotá "America/Bogota"
+bogota_date = datetime.now(bogota_timezone)
+print("Bogotá: ", bogota_date.strftime("%d/%m/%Y, %H:%M:%S"))
+
+mexico_timezone = pytz.timezone("America/Mexico_City")
+mexico_date = datetime.now(mexico_timezone)
+print("Ciudad de México: ", mexico_date.strftime("%d/%m/%Y, %H:%M:%S"))
+
+caracas_timezone = pytz.timezone("America/Caracas")
+caracas_date = datetime.now(caracas_timezone)
+print("Caracas: ", caracas_date.strftime("%d/%m/%Y, %H:%M:%S"))
+```
+
+[![57](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/57.png?raw=true "57")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/57.png?raw=true "57")
+
+# ¡FELICITACIONES!, ya eres un experto en Python.
+## ¡Nunca pares de aprender!
+
+[![58](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/58.png?raw=true "58")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/58.png?raw=true "58")
