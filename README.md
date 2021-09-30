@@ -134,3 +134,87 @@ if __name__ == '__main__':
 ```
 
 [![14](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/14.png?raw=true "14")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/14.png?raw=true "14")
+
+# Conceptos avanzados de funciones
+
+## Scope: alcance de las variables
+
+El scope es el alcance que tienen las variables. Depende de donde declare o inicialice una variable para saber si tiene acceso. Regla de oro:
+
+**"Una variable solo está disponible dentro de la región donde fue creada".**
+
+### Local Scope
+
+Es la región que corresponde el ámbito de una función, donde podremos tener una o más variables, las variables van a ser accesibles únicamente en esta región y no serán visibles para otras regiones.
+
+### Global Scope
+
+Al escribir una o más variables en esta región, estas podrán ser accesibles desde cualquier parte del código.
+
+[![15](https://raw.githubusercontent.com/hackmilo/Notas---Curso-profesional-de-Python/main/img/15.png "15")](https://raw.githubusercontent.com/hackmilo/Notas---Curso-profesional-de-Python/main/img/15.png "15")
+
+## Closures
+
+Es una forma de acceder a variables de otros scopes a través de una nested function (función anidada). Se retorna la nested function y esta recuerda el valor que imprime, aunque a la hora de ejecutarla no esté dentro de su alcance.
+
+Reglas para encontrar un closure:
+
+1. Debemos tener una nested function.
+2. La nested function debe referenciar un valor de un scope superior.
+3. La función que envuelve la nested function debe retornarla también.
+
+### ¿Cuándo utilizar los Closures?
+
+- Cuando tenemos una clase que tiene solo un método.
+- Cuando trabajamos con decoradores.
+
+[![16](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/16.png?raw=true "16")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/16.png?raw=true "16")
+
+## Programando closures
+
+Para este ejemplo se creará un closure que repita strings dependiendo de un número posible, por ejemplo el string “Platzi” con el número 3, esto debería devolver PlatziPlatziPlatzi:
+
+```python
+def make_repeater_of(n):
+    def repeater(string):
+        assert type(string) == str, "Solo puedes utilizar cadenas"
+        return string * n
+    return repeater
+
+def run():
+    repeat_5 = make_repeater_of(5)
+    print(repeat_5("Hola"))
+    repeat_10 = make_repeater_of(10)
+    print(repeat_5("Platzi"))
+
+if __name__ == "__main__":
+    run()
+```
+
+[![17](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/17.png?raw=true "17")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/17.png?raw=true "17")
+
+### Reto
+
+Realizar un closure que retorne una función que retorne una división de un número x en n.
+
+```python
+def make_division_by(n):
+    def division(x: int) -> float:
+        assert n > 0, "El valor ingresado en el divisor debe ser mayor a cero"
+        return round(x/n, 2)
+    return division
+
+def run():
+    division_by_3 = make_division_by(3)
+    division_by_5 = make_division_by(5)
+    division_by_18 = make_division_by(18)
+    print(division_by_3(18))
+    print(division_by_5(100))
+    print(division_by_18(54))
+    print(division_by_3(division_by_5(200)))
+
+if __name__ == "__main__":
+    run()
+```
+
+[![18](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/18.png?raw=true "18")](https://github.com/hackmilo/Notas---Curso-profesional-de-Python/blob/main/img/18.png?raw=true "18")
